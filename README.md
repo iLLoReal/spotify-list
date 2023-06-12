@@ -43,6 +43,11 @@
 git clone https://github.com/iLLoReal/spotify-list
 ```
 Ou par le biais de l'interface github: download ZIP > extraire à la racine de votre dosser web.
+```sh
+cd spotify-list
+npm install
+npm run dev
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -50,8 +55,8 @@ Ou par le biais de l'interface github: download ZIP > extraire à la racine de v
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Se référer à la documentation de l'hébergeur.
-Exemple avec [netlify](https://docs.netlify.com/integrations/frameworks/vite/)
+Se référer à la documentation de l'hébergeur. 
+Exemple avec [netlify](https://docs.netlify.com/integrations/frameworks/vite/#netlify-integration)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -60,7 +65,7 @@ Exemple avec [netlify](https://docs.netlify.com/integrations/frameworks/vite/)
 
 - [x] Ajout du Readme
 - [x] Ajout de la LICENSE
-- [ ] Création de la strucrture générale
+- [ ] Création de la structure générale
 - [ ] Ajout de style
 - [ ] Connexion à un compte spotify
 - [ ] Gestion du loader
