@@ -1,15 +1,26 @@
 
-import { ActionFunctionArgs, Form, LoaderFunctionArgs, redirect } from "react-router-dom";
+import { ActionFunctionArgs, Form, redirect } from "react-router-dom";
+import { getBearerToken, logUserIn } from "../helpers/session";
 
 // HMR invalidate : actions && loader sont source d'effets de bord, à voir s'il convient de les charger depuis un autre module.
 
-export const loginLoader = ({ request }: LoaderFunctionArgs) => {
-    //Gestion de session, redirection
-    console.log(request.headers.get('Cookie'));
-    return request.body;
+export const loginLoader = () => {
+    const bearerToken =  getBearerToken();
+    if (bearerToken)
+    {
+        console.log('User logged in with bearer token: ', bearerToken);
+        return redirect('/liked-titles');
+    }
+    return null;
 }
 
-export const loginAction = ({ request }: ActionFunctionArgs) => {
+export const loginAction = async ({ request }: ActionFunctionArgs) => {
+    const data = Object.fromEntries(await request.formData());
+    const user = {
+        username: data.login as string,
+        password: data.password as string
+    };
+    logUserIn(user);
     return redirect('/liked-titles');
 }
 

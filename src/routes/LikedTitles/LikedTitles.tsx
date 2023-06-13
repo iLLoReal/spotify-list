@@ -1,5 +1,9 @@
+import { redirect } from "react-router-dom";
+import { getBearerToken } from "../../helpers/session";
+
 export const likedTitlesLoader = async () => {
-    //Gestion de session, redirect, récupération des titres.
+    if (!getBearerToken())
+        return redirect('/login');
     return null;
 }
 

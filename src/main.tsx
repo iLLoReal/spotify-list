@@ -11,7 +11,7 @@ import ErrorPage from './error-page.tsx';
 import LikedTitleById from './routes/LikedTitles/LikedTitleById.tsx';
 import LikedTitles, { likedTitlesLoader } from './routes/LikedTitles/LikedTitles.tsx';
 import Login, { loginAction, loginLoader } from './routes/Login.tsx';
-import Root from './routes/Root.tsx';
+import Root, { rootAction, rootLoader } from './routes/Root.tsx';
 
 import "./index.css";
 
@@ -20,6 +20,8 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
+    loader: rootLoader,
+    action: rootAction,
     children: [
       {
         path: "/login/",
