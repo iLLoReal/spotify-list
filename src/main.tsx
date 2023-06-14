@@ -14,6 +14,7 @@ import Login, { loginAction, loginLoader } from './routes/Login.tsx';
 import Root, { rootAction, rootLoader } from './routes/Root.tsx';
 
 import "./index.css";
+import { RequestAccessToken, requestAccessTokenLoader } from './routes/RequestAccessToken.tsx';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,12 @@ const router = createBrowserRouter([
         element: <LikedTitleById />,
         errorElement: <ErrorPage />,
         loader: likedTitlesLoader
+      },
+      {
+        path: "/requestAccessToken",
+        element: <RequestAccessToken />,
+        errorElement: <ErrorPage />,
+        loader: requestAccessTokenLoader
       }
     ]
   }

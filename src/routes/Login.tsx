@@ -1,27 +1,18 @@
 
 import { ActionFunctionArgs, Form, redirect } from "react-router-dom";
-import { getBearerToken, logUserIn } from "../helpers/session";
+import { getBearerToken, requestPermission } from "../helpers/session";
 
 // HMR invalidate : actions && loader sont source d'effets de bord, à voir s'il convient de les charger depuis un autre module.
 
 export const loginLoader = () => {
-    const bearerToken =  getBearerToken();
+    const bearerToken = getBearerToken();
     if (bearerToken)
-    {
-        console.log('User logged in with bearer token: ', bearerToken);
         return redirect('/liked-titles');
-    }
     return null;
 }
 
-export const loginAction = async ({ request }: ActionFunctionArgs) => {
-    const data = Object.fromEntries(await request.formData());
-    const user = {
-        username: data.login as string,
-        password: data.password as string
-    };
-    logUserIn(user);
-    return redirect('/liked-titles');
+export const loginAction = async () => {
+    return await requestPermission();
 }
 
 export default function Login() {
@@ -29,11 +20,7 @@ export default function Login() {
         <section>
             <Form method="POST">
                 <fieldset>
-                    <legend>Please login to spotify</legend>
-                    <input type="text" id="login" name="login" />
-                    <label htmlFor="login">Login</label><br />
-                    <input type="password" id="password" name="password" />
-                    <label htmlFor="password">Password</label><br />
+                    <legend>Spotify autorization</legend>
                     <button type="submit">OK</button>
                 </fieldset>
             </Form>
