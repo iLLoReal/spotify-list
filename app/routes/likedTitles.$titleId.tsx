@@ -1,8 +1,4 @@
-import { useParams } from "react-router-dom";
-
-export const likedTitleByIdLoader = () => {
-    return null;
-}
+import { useParams } from "@remix-run/react";
 
 export default function LikedTitleById() {
     const { titleId } = useParams();
