@@ -9,23 +9,23 @@ export const meta: V2_MetaFunction = () => {
 
 export const action = async ({request}: ActionArgs) => {
   await logUserOut(request);
-  return redirect('/login');
+  return redirect('/authorize');
 }
 
-export const loader = async ({ request }: LoaderArgs): Promise<{ loggedIn: boolean }> => {
+export const loader = async ({ request }: LoaderArgs): Promise<{ authorizationGranted: boolean }> => {
   const bearerToken = await getBearerToken(request);
   if (bearerToken)
-    return { loggedIn: true };
-  return { loggedIn: false };
+    return { authorizationGranted: true };
+  return { authorizationGranted: false };
 }
 
 export default function Index() {
-  const { loggedIn } = useLoaderData();
+  const { authorizationGranted } = useLoaderData();
 
   return (
     <>
       {
-        loggedIn &&
+        authorizationGranted &&
         <Form method="POST">
           <button type="submit">LOGOUT</button>
         </Form>

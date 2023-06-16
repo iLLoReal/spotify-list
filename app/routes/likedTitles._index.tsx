@@ -3,7 +3,7 @@ import { getBearerToken } from "~/helpers/session";
 
 export const loader = async ({ request }: LoaderArgs) => {
     if (!await getBearerToken(request)) {
-        return redirect('/login');
+        return redirect('/authorize');
     }
     return null;
 }

@@ -27,16 +27,14 @@ export const fetchBearerToken = async (request: Request, authorizationCode: stri
             if (!(response.status === 200)) {
                 throw new Error('HTTP status ' + response.status);
             }
-            console.log('Response.data is now : ', response.data);
             return response.data;
         }).then((data) => {
-            console.log('About to set data in session; ', data.access_token);   
             session.set(BEARER_TOKEN_STORAGE_KEY, data.access_token);
         }).catch(error => {
             console.error('Error:', error);
         });
     }
-    return redirect('/login', {
+    return redirect('/authorize', {
         headers: {
             "Set-Cookie": await commitSession(session)
         }
@@ -50,7 +48,6 @@ export const fetchAuthorizationCode = async (request: Request) => {
     let scope = 'playlist-read-private playlist-read-collaborative';
 
     const session = await getSession(request.headers.get('Cookie'));
-    console.log(session, codeVerifier);
     session.set('code_verifier', codeVerifier);
     let args = new URLSearchParams({
         response_type: 'code',

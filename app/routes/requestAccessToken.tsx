@@ -1,5 +1,5 @@
 import { LoaderArgs } from "@remix-run/node";
-import { fetchBearerToken } from "~/api/login";
+import { fetchBearerToken } from "~/api/authorize";
 
 export const loader = async ({ request }: LoaderArgs) => {
     const url = new URL(request.url);
