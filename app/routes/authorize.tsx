@@ -14,13 +14,13 @@ export const action = async ({request}: ActionArgs) => {
     return await requestPermission(request);
 }
 
-export default function Login() {
+export default function authorize() {
     return (
         <section>
             <Form method="POST">
                 <fieldset>
                     <legend>Spotify autorization</legend>
-                    <button type="submit">OK</button>
+                    <button type="submit">Grant</button>
                 </fieldset>
             </Form>
         </section>
