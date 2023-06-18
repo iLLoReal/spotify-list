@@ -1,9 +1,8 @@
 import { redirect } from '@remix-run/node';
 import axios from 'axios';
 import crypto from 'crypto';
-import { BEARER_TOKEN_STORAGE_KEY, REDIRECT_URI } from "~/../globals";
+import { BEARER_TOKEN_STORAGE_KEY, REDIRECT_URI, scope } from "~/../globals";
 import { commitSession, getSession } from '~/session';
-
 
 export const fetchBearerToken = async (request: Request, authorizationCode: string = '') => {
     const session = await getSession(request.headers.get('Cookie'));
@@ -20,7 +19,7 @@ export const fetchBearerToken = async (request: Request, authorizationCode: stri
         });
         await axios.post('https://accounts.spotify.com/api/token', body, {
             headers: {
-                'Authorization': 'Basic ' + btoa(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET), //CLIENT_SECRET
+                'Authorization': 'Basic ' + btoa(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET),
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
         }).then(response => {
@@ -45,14 +44,13 @@ export const fetchAuthorizationCode = async (request: Request) => {
     const codeVerifier = generateCodeVerifier();
     const codeChallenge = await generateCodeChallenge(codeVerifier);
     let state = generateRandomString(16);
-    let scope = 'playlist-read-private playlist-read-collaborative';
 
     const session = await getSession(request.headers.get('Cookie'));
     session.set('code_verifier', codeVerifier);
     let args = new URLSearchParams({
         response_type: 'code',
         client_id: process.env.CLIENT_ID || '',
-        scope: scope,
+        scope: scope.savedSongs,
         redirect_uri: REDIRECT_URI,
         state: state,
         code_challenge_method: 'S256',
