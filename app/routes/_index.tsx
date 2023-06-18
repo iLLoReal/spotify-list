@@ -1,15 +1,14 @@
 
-import { ActionArgs, LoaderArgs, redirect } from "@remix-run/node";
-import { Form, Outlet, V2_MetaFunction, useLoaderData } from "@remix-run/react";
+import { ActionArgs, LoaderArgs } from "@remix-run/node";
+import { Form, Link, Outlet, V2_MetaFunction, useLoaderData } from "@remix-run/react";
 import { getBearerToken, logUserOut } from "../helpers/session";
 
 export const meta: V2_MetaFunction = () => {
   return [{ title: "spotify-list" }];
 };
 
-export const action = async ({request}: ActionArgs) => {
-  await logUserOut(request);
-  return redirect('/authorize');
+export const action = async ({ request }: ActionArgs) => {
+  return await logUserOut(request);
 }
 
 export const loader = async ({ request }: LoaderArgs): Promise<{ authorizationGranted: boolean }> => {
@@ -32,6 +31,7 @@ export default function Index() {
       }
       <h1>Spotify-Likes</h1>
       <div>
+        <Link to={'/authorize'}>Log in to spotify !</Link>
       </div>
     </>
   )
