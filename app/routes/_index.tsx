@@ -32,7 +32,6 @@ export default function Index() {
       }
       <h1>Spotify-Likes</h1>
       <div>
-        <Outlet />
       </div>
     </>
   )

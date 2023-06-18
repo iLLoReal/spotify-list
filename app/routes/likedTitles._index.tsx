@@ -1,8 +1,11 @@
 import { LoaderArgs, redirect } from "@remix-run/node";
+import { ClientOnly } from "remix-utils";
+import Spinner from "~/components/Spinner";
+import Tracks from "~/components/Tracks";
 import { getBearerToken } from "~/helpers/session";
 
 export const loader = async ({ request }: LoaderArgs) => {
-    if (!await getBearerToken(request)) {
+    if (!await getBearerToken(request) && process.env.NODE_ENV === 'production') {
         return redirect('/authorize');
     }
     return null;
@@ -10,8 +13,14 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function LikedTitles() {
     return (
-        <div>
-            Les musiques de spotify ont été chargées.
-        </div>
-    )
+        <>
+            <ClientOnly fallback={
+                <div className="spinner">
+                    <Spinner />
+                </div>}
+            >
+                {() => <Tracks />}
+            </ClientOnly>
+        </>
+    );
 }
