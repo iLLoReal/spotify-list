@@ -10,7 +10,7 @@ export const action = async ({ request }: ActionArgs) => {
 
 export const loader = async ({ request }: LoaderArgs) => {
     const bearerToken = await getBearerToken(request);
-    if (!bearerToken && process.env.NODE_ENV === "production") {
+    if (!bearerToken) {
         return redirect('/authorize');
     }
     return true;

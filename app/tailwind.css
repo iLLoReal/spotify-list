@@ -4,25 +4,21 @@
 
 html {
     @apply h-full;
-    @apply overflow-hidden;
     @apply text-white;
     @apply bg-[#121212];
   }
   body {
     @apply h-full;
-    @apply overflow-hidden;
     @apply text-white;
     @apply bg-[#121212];
   }
   div#root {
     @apply h-full;
-    @apply overflow-hidden;
     @apply text-white;
     @apply bg-[#121212];
   }
   main {
     @apply h-full;
-    @apply overflow-hidden;
     @apply text-white;
     @apply bg-[#121212];
   }

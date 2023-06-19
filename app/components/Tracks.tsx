@@ -18,7 +18,7 @@ export default function Tracks() {
             {!fetcher.data ?
                 <div className="h-full">
                     <Spinner />
-                </div> : <div className="flex flex-col justify-around">
+                </div> : <div className="flex flex-col justify-around overflow-scroll">
                     Les {fetcher.data?.length} musiques Spotify ont été chargées :
                     {fetcher.data.map((item: Item, id: number) => {
 
