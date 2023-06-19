@@ -1,6 +1,6 @@
 import { useFetcher } from "@remix-run/react";
 import { Fragment, useEffect } from "react";
-import { Image, Item } from "~/types/spotify";
+import { Item } from "~/types/spotify";
 import Spinner from "./Spinner";
 import Track from "./Track";
 
