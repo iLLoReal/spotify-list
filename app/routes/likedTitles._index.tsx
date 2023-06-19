@@ -5,7 +5,7 @@ import Tracks from "~/components/Tracks";
 import { getBearerToken } from "~/helpers/session";
 
 export const loader = async ({ request }: LoaderArgs) => {
-    if (!await getBearerToken(request) && process.env.NODE_ENV === 'production') {
+    if (!await getBearerToken(request) && process.env.NODE_ENV === "production") {
         return redirect('/authorize');
     }
     return null;
