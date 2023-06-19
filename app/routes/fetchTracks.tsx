@@ -12,7 +12,7 @@ export function ErrorBoundary({ error }: any) {
 
     return (
         <div>
-            fecth error: {error}
+            Erreur de récupération des données: {error}
             <div>
                 <Link to={"/"}>Revenir à l'acceuil</Link>
             </div>

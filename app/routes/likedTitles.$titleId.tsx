@@ -5,7 +5,7 @@ export default function LikedTitleById() {
 
     return (
         <div>
-            Title id : {titleId}
+            Id: {titleId}
         </div>
     )
 }

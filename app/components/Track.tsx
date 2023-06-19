@@ -11,8 +11,14 @@ export default function Track({ item, id }: TrackProps) {
     const { genres } = item.track.album;
     const { images } = item.track.album;
     return (
-        <div style={{ height: images[0].height + 'px' }} className="bg-gray-200 flex flex-row flex-shrink-0 justify-evenly border-gray-500">
-            <div className="self-center">
+        <div
+            style={{ height: images[0].height + 'px' }}
+            className="bg-black border-l-2 border-r-2  
+            flex flex-row flex-shrink-0 
+            mt-5
+            justify-evenly border-gray-500"
+        >
+            <div className="self-center border rounded p-10">
                 {id + 1}
             </div>
             <div style={{
@@ -21,7 +27,9 @@ export default function Track({ item, id }: TrackProps) {
                 height: images[0].height
             }}>
             </div>
-            <div className="flex flex-col justify-around">
+            <div className="flex 
+            flex-col justify-around"
+            >
                 <div>
                     Auteur : {artists.at(0)?.name}
                 </div>
@@ -33,10 +41,28 @@ export default function Track({ item, id }: TrackProps) {
                 </div>
             </div>
             <div className="self-center">
-                <div className="flex justify-between text-xs font-semibold text-gray-500 px-4 py-2">
-                    <div className="flex space-x-3 p-2">
-                        <button className="rounded-full w-8 h-8 flex items-center justify-center pl-0.5 ring-2 ring-gray-100 focus:outline-none">
-                            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <div className="flex 
+                justify-center items-center text-xs 
+                font-semibold text-black
+                bg-green-500 rounded-full
+                w-16 h-16
+                px-4 py-2"
+                >
+                    <div className="flex 
+                    space-x-3 p-2"
+                    >
+                        <button>
+                            <svg
+                                className="w-8 h-8"
+                                viewBox="0 0 24 24"
+                                fill="black"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
                         </button>
                     </div>
                 </div>
