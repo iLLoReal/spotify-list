@@ -1,6 +1,6 @@
 
 import { ActionArgs, LoaderArgs } from "@remix-run/node";
-import { Form, Link, Outlet, V2_MetaFunction, useLoaderData } from "@remix-run/react";
+import { Form, Link, V2_MetaFunction, useLoaderData } from "@remix-run/react";
 import { getBearerToken, logUserOut } from "../helpers/session";
 
 export const meta: V2_MetaFunction = () => {
@@ -23,16 +23,16 @@ export default function Index() {
 
   return (
     <>
-      {
-        authorizationGranted &&
-        <Form method="POST">
-          <button type="submit">LOGOUT</button>
-        </Form>
-      }
       <h1>Spotify-Likes</h1>
-      <div>
-        <Link to={'/authorize'}>Log in to spotify !</Link>
-      </div>
+      {
+        authorizationGranted ?
+          <Form method="post">
+            <button type="submit">LOGOUT</button>
+          </Form> :
+          <div>
+            <Link to={'/authorize'}>Log in to spotify !</Link>
+          </div>
+      }
     </>
   )
 }

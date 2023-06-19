@@ -1,7 +1,7 @@
 import { redirect } from '@remix-run/node';
 import axios from 'axios';
 import crypto from 'crypto';
-import { BEARER_TOKEN_STORAGE_KEY, REDIRECT_URI, scope } from "~/../globals";
+import { BEARER_TOKEN_KEY, REDIRECT_URI, scope } from "~/../globals";
 import { commitSession, getSession } from '~/session';
 
 export const fetchBearerToken = async (request: Request, authorizationCode: string = '') => {
@@ -28,7 +28,7 @@ export const fetchBearerToken = async (request: Request, authorizationCode: stri
             }
             return response.data;
         }).then((data) => {
-            session.set(BEARER_TOKEN_STORAGE_KEY, data.access_token);
+            session.set(BEARER_TOKEN_KEY, data.access_token);
         }).catch(error => {
             console.error('Error:', error);
         });

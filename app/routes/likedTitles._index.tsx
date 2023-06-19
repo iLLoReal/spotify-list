@@ -15,7 +15,7 @@ export default function LikedTitles() {
     return (
         <>
             <ClientOnly fallback={
-                <div className="spinner">
+                <div className="h-full">
                     <Spinner />
                 </div>}
             >
