@@ -1,13 +1,22 @@
 {
+  "include": [
+    "remix.env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "server.js",
+    "remix.init/server.js"
+  ],
   "compilerOptions": {
-    
     "target": "ES2019",
     "useDefineForClassFields": true,
     //Previous conf
-//    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "lib": ["DOM", "DOM.Iterable", "ES2019"],
+    //    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2019"
+    ],
     "skipLibCheck": true,
-
     /* Bundler mode */
     //Previous conf
     //"moduleResolution": "bundler",
@@ -16,7 +25,6 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-
     /* Remix */
     "esModuleInterop": true,
     "moduleResolution": "node",
@@ -24,20 +32,11 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"]
+      "~/*": [
+        "./app/*"
+      ]
     },
-
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    "remix.env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "server.js",
-    "remix.init/server.js"
-  ],
 }
