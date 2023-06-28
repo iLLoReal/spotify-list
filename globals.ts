@@ -1,9 +1,10 @@
 //session keys
 export const BEARER_TOKEN_KEY = "bearerToken";
-export const CODE_VERIFIER_KEY = "code_verifier"
+export const CODE_VERIFIER_KEY = "code_verifier";
 
 // Redirect URI registered in spotify's app account, used for granting authorization.
-export const REDIRECT_URI = window.location.hostname + "/requestAccessToken";
+export const SUBDOMAIN = ".netlify.app";
+export const REDIRECT_URI = process.env.HOSTNAME + SUBDOMAIN + "/requestAccessToken";
 
 export const PLAYLIST_LIMIT = 20;
 
