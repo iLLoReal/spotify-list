@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    
     "target": "ES2019",
     "useDefineForClassFields": true,
     //Previous conf
@@ -32,5 +33,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["app"],
+  "include": [
+    "remix.env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "server.js",
+    "remix.init/server.js"
+  ],
 }
