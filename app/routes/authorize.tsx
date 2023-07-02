@@ -11,6 +11,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 }
 
 export const action = async ({ request }: ActionArgs) => {
+    console.log('About to request permission');
     return await requestPermission(request);
 }
 
