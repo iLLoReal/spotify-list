@@ -5,6 +5,7 @@ import { Form } from "@remix-run/react";
 
 export const loader = async ({ request }: LoaderArgs) => {
     const bearerToken = await getBearerToken(request);
+    console.log('notre bearer: ', bearerToken);
     if (bearerToken)
         return redirect('/LikedTitles');
     return null;
