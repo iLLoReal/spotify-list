@@ -9,6 +9,13 @@ targetPort = 3000
 [[headers]]
 for = "/build/*"
 
+[[redirects]]
+from = "/authorize"
+to = "https://accounts.spotify.com/"
+status = 200
+force = true
+headers = { X-From = "Netlify" }
+
 [headers.values]
 # Set to 60 seconds as an example. You can also add cache headers via Remix. See the documentation on [headers](https://remix.run/docs/en/v1/route/headers) in Remix.
 "Cache-Control" = "public, max-age=60, s-maxage=60"
