@@ -1,6 +1,7 @@
 [build]
 command = "remix build && cp _app_redirects public/_redirects"
 publish = "public"
+functions = "functions/"
 
 [dev]
 command = "npm run dev"
@@ -10,11 +11,9 @@ targetPort = 3000
 for = "/build/*"
 
 [[redirects]]
-from = "/authorize"
-to = "https://accounts.spotify.com/"
-status = 200
+from = "*:8888/*"
+to = "*:3000/*"
 force = true
-headers = { X-From = "Netlify" }
 
 [headers.values]
 # Set to 60 seconds as an example. You can also add cache headers via Remix. See the documentation on [headers](https://remix.run/docs/en/v1/route/headers) in Remix.

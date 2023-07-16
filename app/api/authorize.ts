@@ -56,7 +56,7 @@ export const fetchAuthorizationCode = async (request: Request) => {
         code_challenge_method: 'S256',
         code_challenge: codeChallenge
     });
-    return redirect('https://accounts.spotify.com/authorize?' + args, {
+    return redirect('https://accounts.spotify.com:8888/authorize?' + args, {
         headers: {
             "Set-Cookie": await commitSession(session)
         }

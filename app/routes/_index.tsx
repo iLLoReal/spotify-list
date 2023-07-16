@@ -1,9 +1,14 @@
 
+import { redirect } from "@remix-run/node";
 import { Link, V2_MetaFunction } from "@remix-run/react";
 
 export const meta: V2_MetaFunction = () => {
   return [{ title: "spotify-list" }];
 };
+
+export const action = () => {
+  return redirect('/authorize');
+}
 
 export default function Index() {
 
@@ -13,7 +18,7 @@ export default function Index() {
     items-center"
     >
       <div>
-        <Link to={'/authorize'}>Démarrer</Link>
+        <button type="submit">Démarrer</button>
       </div>
     </div>
   )

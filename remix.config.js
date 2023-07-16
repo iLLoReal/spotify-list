@@ -6,7 +6,7 @@ const baseConfig =
         serverBuildPath: ".netlify/functions-internal/server.js",
       }
     : // otherwise support running remix dev, i.e. no custom server
-      undefined;
+    undefined;
 
 /** @type {import('@remix-run/dev').AppConfig} */
 module.exports = {
