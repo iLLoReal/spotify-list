@@ -1,18 +1,13 @@
 
 import { ActionArgs, LoaderArgs, redirect } from "@remix-run/node";
+import { Form } from "@remix-run/react";
 import { getBearerToken, requestPermission } from "~/helpers/session";
-import { Form, Link, useLoaderData } from "@remix-run/react";
-import { getSession } from "~/session";
-import { CODE_VERIFIER_KEY } from "globals";
 
 export const loader = async ({ request }: LoaderArgs) => {
-    const session = await getSession('Cookie');
-    const codeVerifier = await session.get(CODE_VERIFIER_KEY);
-    console.log(codeVerifier);
     const bearerToken = await getBearerToken(request);
     if (bearerToken)
         return redirect('/LikedTitles');
-    return codeVerifier;
+    return null;
 }
 
 export const action = async ({ request }: ActionArgs) => {
@@ -20,17 +15,6 @@ export const action = async ({ request }: ActionArgs) => {
     return await requestPermission(request);
 }
 
-export function ErrorBoundary({ error }: any) {
-
-    return (
-        <div>
-            Erreur de récupération des données: {error}
-            <div>
-                <Link to={"/"}>Revenir à l'acceuil</Link>
-            </div>
-        </div>
-    )
-}
 export default function authorize() {
     console.log('loader data');
     return (
