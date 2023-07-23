@@ -32,8 +32,7 @@ export function ErrorBoundary({ error }: any) {
     )
 }
 export default function authorize() {
-    const loaderData = useLoaderData();
-    console.log('loader data : ', loaderData);
+    console.log('loader data');
     return (
         <div className="h-full flex 
         flex-col items-center 
