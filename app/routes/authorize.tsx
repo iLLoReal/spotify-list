@@ -8,9 +8,11 @@ export const loader = async ({ request }: LoaderArgs) => {
     const session = await getSession(request.headers.get('Cookie'));
     const codeVerifer = session.get('code_verifier');
     const bearerToken = await getBearerToken(request);
-    if (bearerToken)
+/*    if (bearerToken)
         return redirect('/LikedTitles');
-    return codeVerifer;
+*/    if (codeVerifer)
+        return codeVerifer;
+    return null;
 }
 
 export const action = async ({ request }: ActionArgs) => {
