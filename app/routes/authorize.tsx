@@ -52,7 +52,6 @@ export default function authorize() {
                     </button>
                 </div>
             </Form>
-            {loaderData ? <p>{loaderData}</p> : null}
         </div>
     )
 }
