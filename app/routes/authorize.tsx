@@ -2,8 +2,13 @@
 import { ActionArgs, LoaderArgs, redirect } from "@remix-run/node";
 import { getBearerToken, requestPermission } from "~/helpers/session";
 import { Form } from "@remix-run/react";
+import { getSession } from "~/session";
+import { CODE_VERIFIER_KEY } from "globals";
 
 export const loader = async ({ request }: LoaderArgs) => {
+    const session = await getSession('Cookie');
+    const codeVerifier = await session.get(CODE_VERIFIER_KEY);
+    console.log(codeVerifier);
     const bearerToken = await getBearerToken(request);
     console.log('notre bearer: ', bearerToken);
     if (bearerToken)
