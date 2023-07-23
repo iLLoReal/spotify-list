@@ -1,6 +1,6 @@
 
 import { ActionArgs, LoaderArgs, redirect } from "@remix-run/node";
-import { Form } from "@remix-run/react";
+import { Form, useLoaderData } from "@remix-run/react";
 import { getBearerToken, requestPermission } from "~/helpers/session";
 import { getSession } from "~/session";
 
@@ -10,7 +10,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     const bearerToken = await getBearerToken(request);
     if (bearerToken)
         return redirect('/LikedTitles');
-    return null;
+    return codeVerifer;
 }
 
 export const action = async ({ request }: ActionArgs) => {
@@ -19,7 +19,8 @@ export const action = async ({ request }: ActionArgs) => {
 }
 
 export default function authorize() {
-    console.log('loader data');
+    const data = useLoaderData();
+    console.log('loader data: ', data);
     return (
         <div className="h-full flex 
         flex-col items-center 
