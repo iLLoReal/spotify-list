@@ -22,6 +22,7 @@ export const action = async ({ request }: ActionArgs) => {
 
 export default function authorize() {
     const loaderData = useLoaderData();
+    console.log('loader data : ', loaderData);
     return (
         <div className="h-full flex 
         flex-col items-center 
