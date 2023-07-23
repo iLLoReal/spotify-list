@@ -1,5 +1,5 @@
 import { redirect } from '@remix-run/node';
-import { BEARER_TOKEN_KEY, CODE_VERIFIER_KEY } from '~/../globals.ts';
+import { BEARER_TOKEN_KEY, CODE_VERIFIER_KEY } from '~/../globals';
 import { fetchAuthorizationCode } from '~/api/authorize';
 import { commitSession, getSession } from '~/session';
 

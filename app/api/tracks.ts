@@ -14,7 +14,7 @@ export const fetchTracks = async (request: Request) => {
     const bearerToken = session.get('bearerToken');
     let likedTitles: { data: { items: Item[] } };
 
-    if (process.env.NODE_ENV !== "production") {
+    if (process.env.NODE_ENV === "production") {
         likedTitles = await axios.get(`https://api.spotify.com/v1/me/tracks`, {
             headers: {
                 'Authorization': 'Bearer ' + bearerToken,

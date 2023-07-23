@@ -1,13 +1,12 @@
 
 import { redirect } from "@remix-run/node";
-import { Form, Link, V2_MetaFunction } from "@remix-run/react";
+import { Form, V2_MetaFunction } from "@remix-run/react";
 
 export const meta: V2_MetaFunction = () => {
   return [{ title: "spotify-list" }];
 };
 
 export const action = () => {
-  console.log('Action');
   return redirect('/authorize');
 }
 
