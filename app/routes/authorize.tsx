@@ -2,8 +2,10 @@
 import { ActionArgs, LoaderArgs, redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import { getBearerToken, requestPermission } from "~/helpers/session";
+import { getSession } from "~/session";
 
 export const loader = async ({ request }: LoaderArgs) => {
+    const session = await getSession(request.headers.get('Cookie'));
     const bearerToken = await getBearerToken(request);
     if (bearerToken)
         return redirect('/LikedTitles');
