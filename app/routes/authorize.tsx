@@ -1,7 +1,7 @@
 
 import { ActionArgs, LoaderArgs, redirect } from "@remix-run/node";
 import { getBearerToken, requestPermission } from "~/helpers/session";
-import { Form } from "@remix-run/react";
+import { Form, useLoaderData } from "@remix-run/react";
 import { getSession } from "~/session";
 import { CODE_VERIFIER_KEY } from "globals";
 
@@ -10,10 +10,9 @@ export const loader = async ({ request }: LoaderArgs) => {
     const codeVerifier = await session.get(CODE_VERIFIER_KEY);
     console.log(codeVerifier);
     const bearerToken = await getBearerToken(request);
-    console.log('notre bearer: ', bearerToken);
     if (bearerToken)
         return redirect('/LikedTitles');
-    return null;
+    return codeVerifier;
 }
 
 export const action = async ({ request }: ActionArgs) => {
@@ -22,6 +21,7 @@ export const action = async ({ request }: ActionArgs) => {
 }
 
 export default function authorize() {
+    const loaderData = useLoaderData();
     return (
         <div className="h-full flex 
         flex-col items-center 
@@ -51,6 +51,7 @@ export default function authorize() {
                     </button>
                 </div>
             </Form>
+            {loaderData ? <p>{loaderData}</p> : null}
         </div>
     )
 }
