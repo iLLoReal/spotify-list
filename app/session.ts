@@ -11,12 +11,14 @@ export type SessionFlashData = {
   error: string;
 };
 
+let cookieName = process.env.NODE_ENV === 'production' ? '__prod_session' : '__dev_session';
+
 
 const { getSession, commitSession, destroySession } =
   createCookieSessionStorage<SessionData, SessionFlashData>(
     {
       cookie: {
-        name: "__session",
+        name: cookieName,
         domain: "localhost",
         httpOnly: true,
         maxAge: 60,
