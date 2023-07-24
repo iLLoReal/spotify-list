@@ -8,6 +8,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     const session = await getSession(request.headers.get('Cookie'));
     const codeVerifer = session.get('code_verifier');
     const bearerToken = await getBearerToken(request);
+    console.log('hostname: ', process.env.HOSTNAME);
     if (bearerToken)
         return redirect('/LikedTitles');
     if (codeVerifer)
@@ -16,6 +17,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 }
 
 export const action = async ({ request }: ActionArgs) => {
+    console.log('hostname: ', process.env.HOSTNAME);
     console.log('About to request permission');
     return await requestPermission(request);
 }
@@ -23,7 +25,6 @@ export const action = async ({ request }: ActionArgs) => {
 export default function authorize() {
     const data = useLoaderData();
     console.log('loader data: ', data);
-    console.log('hostname: ', process.env.HOSTNAME);
     return (
         <div className="h-full flex 
         flex-col items-center 
