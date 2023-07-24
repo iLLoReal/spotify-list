@@ -6,24 +6,17 @@ import { getBearerToken, requestPermission } from "~/helpers/session";
 import { getSession } from "~/session";
 
 export const loader = async ({ request }: LoaderArgs) => {
-    const session = await getSession(request.headers.get('Cookie'));
-    const codeVerifier = session.get('code_verifier');
     const bearerToken = await getBearerToken(request);
     if (bearerToken)
         return redirect('/LikedTitles');
-    return codeVerifier || null;
+    return null;
 }
 
 export const action = async ({ request }: ActionArgs) => {
-    console.log('hostname: ', process.env.HOSTNAME);
-    console.log('About to request permission');
     return await requestPermission(request);
 }
 
 export default function authorize() {
-    const data = useLoaderData();
-    console.log('loader data: ', data);
-    console.log('redirect_uri: ', REDIRECT_URI);
     return (
         <div className="h-full flex 
         flex-col items-center 

@@ -4,7 +4,6 @@ import { fetchTracks } from "~/api/tracks";
 
 export const loader = async ({ request }: LoaderArgs) => {
     const tracks = await fetchTracks(request);
-    console.log(tracks);
     return tracks!;
 }
 

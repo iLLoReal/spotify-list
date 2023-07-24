@@ -16,7 +16,6 @@ export const logUserOut = async (request: Request) => {
     const session = await getSession(request.headers.get('Cookie'));
     session.set(BEARER_TOKEN_KEY, '');
     session.set(CODE_VERIFIER_KEY, '');
-    console.log('Logging out');
     const newSession = await commitSession(session);
     return redirect('/', {
         headers: {

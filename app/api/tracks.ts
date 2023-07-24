@@ -31,6 +31,5 @@ export const fetchTracks = async (request: Request) => {
         }
         await delay(2000);
     }
-    console.log(likedTitles.data.items);
     return likedTitles.data.items as Item[];
 }
