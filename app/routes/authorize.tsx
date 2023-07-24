@@ -6,14 +6,11 @@ import { getSession } from "~/session";
 
 export const loader = async ({ request }: LoaderArgs) => {
     const session = await getSession(request.headers.get('Cookie'));
-    const codeVerifer = session.get('code_verifier');
+    const codeVerifier = session.get('code_verifier');
     const bearerToken = await getBearerToken(request);
-    console.log('hostname: ', process.env.HOSTNAME);
     if (bearerToken)
         return redirect('/LikedTitles');
-    if (codeVerifer)
-        return codeVerifer;
-    return null;
+    return codeVerifier || null;
 }
 
 export const action = async ({ request }: ActionArgs) => {
