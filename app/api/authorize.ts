@@ -1,13 +1,14 @@
 import { redirect } from '@remix-run/node';
 import axios from 'axios';
 import crypto from 'crypto';
-import { BEARER_TOKEN_KEY, REDIRECT_URI, scope } from "~/../globals";
+import { BEARER_TOKEN_KEY, scope } from "~/../globals";
 import { commitSession, getSession } from '~/session';
 
 export const fetchBearerToken = async (request: Request, authorizationCode: string = '') => {
     const session = await getSession(request.headers.get('Cookie'));
     let codeVerifier = session.get('code_verifier');
-
+    const requestUrl = new URL(request.url);
+    const REDIRECT_URI = `${requestUrl.protocol}//${requestUrl.host}/requestAccessToken`;
     if (authorizationCode && codeVerifier) {
         let body = new URLSearchParams({
             grant_type: 'authorization_code',
@@ -44,7 +45,9 @@ export const fetchAuthorizationCode = async (request: Request) => {
     const codeVerifier = generateCodeVerifier();
     const codeChallenge = await generateCodeChallenge(codeVerifier);
     let state = generateRandomString(16);
-
+    const requestUrl = new URL(request.url);
+    const REDIRECT_URI = `${requestUrl.protocol}//${requestUrl.host}/requestAccessToken`;
+    
     const session = await getSession(request.headers.get('Cookie'));
     session.set('code_verifier', codeVerifier);
     let args = new URLSearchParams({
