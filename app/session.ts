@@ -22,7 +22,7 @@ const { getSession, commitSession, destroySession } =
         httpOnly: true,
         maxAge: 60,
         path: "/",
-        sameSite: "none",
+        sameSite: "lax",
         secrets: [process.env.COOKIE_SECRET || "s3cret1"],
         secure: process.env.NODE_ENV === "production" ? true : false,
       },
