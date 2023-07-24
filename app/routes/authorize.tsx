@@ -23,6 +23,7 @@ export const action = async ({ request }: ActionArgs) => {
 export default function authorize() {
     const data = useLoaderData();
     console.log('loader data: ', data);
+    console.log('hostname: ', process.env.HOSTNAME);
     return (
         <div className="h-full flex 
         flex-col items-center 
