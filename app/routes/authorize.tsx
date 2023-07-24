@@ -17,6 +17,7 @@ export const action = async ({ request }: ActionArgs) => {
 }
 
 export default function authorize() {
+    console.log('redirect_uri : ', REDIRECT_URI);
     return (
         <div className="h-full flex 
         flex-col items-center 
