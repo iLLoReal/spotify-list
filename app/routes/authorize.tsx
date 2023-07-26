@@ -1,9 +1,8 @@
 
 import { ActionArgs, LoaderArgs, redirect } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
-import { REDIRECT_URI } from "globals";
+import { Form } from "@remix-run/react";
+import { REDIRECT_ENDPOINT } from "globals";
 import { getBearerToken, requestPermission } from "~/helpers/session";
-import { getSession } from "~/session";
 
 export const loader = async ({ request }: LoaderArgs) => {
     const bearerToken = await getBearerToken(request);
@@ -17,7 +16,7 @@ export const action = async ({ request }: ActionArgs) => {
 }
 
 export default function authorize() {
-    console.log('redirect_uri : ', REDIRECT_URI);
+    console.log('redirect_uri : ', REDIRECT_ENDPOINT);
     return (
         <div className="h-full flex 
         flex-col items-center 

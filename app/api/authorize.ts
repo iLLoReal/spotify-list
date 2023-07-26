@@ -1,17 +1,19 @@
 import { redirect } from '@remix-run/node';
 import axios from 'axios';
 import crypto from 'crypto';
-import { BEARER_TOKEN_KEY, REDIRECT_URI, scope } from "~/../globals";
+import { BEARER_TOKEN_KEY, REDIRECT_ENDPOINT, scope } from "~/../globals";
 import { commitSession, getSession } from '~/session';
 
 export const fetchBearerToken = async (request: Request, authorizationCode: string = '') => {
     const session = await getSession(request.headers.get('Cookie'));
+    const redirect_uri = (new URL(request.url)).origin + REDIRECT_ENDPOINT;
+
     let codeVerifier = session.get('code_verifier');
     if (authorizationCode && codeVerifier) {
         let body = new URLSearchParams({
             grant_type: 'authorization_code',
             code: authorizationCode,
-            redirect_uri: REDIRECT_URI,
+            redirect_uri: redirect_uri,
             client_id: process.env.CLIENT_ID || '',
             client_secret: process.env.CLIENT_SECRET || '',
             code_verifier: codeVerifier
@@ -43,6 +45,7 @@ export const fetchAuthorizationCode = async (request: Request) => {
     const codeVerifier = generateCodeVerifier();
     const codeChallenge = await generateCodeChallenge(codeVerifier);
     let state = generateRandomString(16);
+    const redirect_uri = (new URL(request.url)).origin + REDIRECT_ENDPOINT;
 
     const session = await getSession(request.headers.get('Cookie'));
     session.set('code_verifier', codeVerifier);
@@ -50,7 +53,7 @@ export const fetchAuthorizationCode = async (request: Request) => {
         response_type: 'code',
         client_id: process.env.CLIENT_ID || '',
         scope: scope.savedSongs,
-        redirect_uri: REDIRECT_URI,
+        redirect_uri: redirect_uri,
         state: state,
         code_challenge_method: 'S256',
         code_challenge: codeChallenge
