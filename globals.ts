@@ -7,7 +7,8 @@ export const PROTOCOL =  process.env.NODE_ENV === 'production' ? "https://" : 'h
 export const HOSTNAME = process.env.NODE_ENV === 'production' ? process.env.HOSTNAME : 'localhost';
 export const PORT = process.env.NODE_ENV === 'production' ?  '' : ':8888';
 
-export const REDIRECT_URI = PROTOCOL + HOSTNAME + PORT + "/requestAccessToken";
+//export const REDIRECT_URI = PROTOCOL + HOSTNAME + PORT + "/requestAccessToken";
+export const REDIRECT_URI = "https://lucky-dusk-892462.netlify.app/requestAccessToken";
 export const PLAYLIST_LIMIT = 20;
 
 //Spotify authorization scope
