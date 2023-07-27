@@ -11,18 +11,10 @@ export const meta: V2_MetaFunction = () => {
 export const action = async ({request}: ActionArgs) => {
   // Tricks pour set le domain du cookie dynamiquement
   const url = new URL(request.url);
-  const session = await getSession('Cookies');
-  session.set('loggedIn', true);
-  return redirect('/authorize', {
-    headers: {
-        "Set-Cookie": await commitSession(session)
-    }
-});
+  return redirect('/authorize');
 }
 
 export default function Index() {
-  console.log('Redirect_uri: ', REDIRECT_ENDPOINT);
-  console.log('Hello');
   return (
     <div className="h-full 
     flex flex-col justify-center 

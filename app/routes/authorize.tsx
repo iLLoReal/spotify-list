@@ -8,7 +8,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     const bearerToken = await getBearerToken(request);
     if (bearerToken)
         return redirect('/LikedTitles');
-    return process.env.DOMAIN;
+    return null;
 }
 
 export const action = async ({ request }: ActionArgs) => {
@@ -16,9 +16,6 @@ export const action = async ({ request }: ActionArgs) => {
 }
 
 export default function authorize() {
-    const loaderData = useLoaderData();
-    console.log('process env domain : ', loaderData);
-    console.log('redirect_uri : ', REDIRECT_ENDPOINT);
     return (
         <div className="h-full flex 
         flex-col items-center 
