@@ -1,7 +1,7 @@
 import { redirect } from '@remix-run/node';
 import axios from 'axios';
 import crypto from 'crypto';
-import { BEARER_TOKEN_KEY, REDIRECT_ENDPOINT, scope } from "~/../globals";
+import { BEARER_TOKEN_KEY, CODE_VERIFIER_KEY, REDIRECT_ENDPOINT, scope } from "~/../globals";
 import { commitSession, getSession } from '~/session';
 
 export const fetchBearerToken = async (request: Request, authorizationCode: string = '') => {
@@ -9,6 +9,10 @@ export const fetchBearerToken = async (request: Request, authorizationCode: stri
     const redirect_uri = (new URL(request.url)).origin + REDIRECT_ENDPOINT;
 
     let codeVerifier = session.get('code_verifier');
+    if (!codeVerifier)
+        {
+            throw new Error('session not set');
+        }
     if (authorizationCode && codeVerifier) {
         let body = new URLSearchParams({
             grant_type: 'authorization_code',
@@ -27,6 +31,7 @@ export const fetchBearerToken = async (request: Request, authorizationCode: stri
             if (!(response.status === 200)) {
                 throw new Error('HTTP status ' + response.status);
             }
+            console.log(response.data);
             return response.data;
         }).then((data) => {
             session.set(BEARER_TOKEN_KEY, data.access_token);
