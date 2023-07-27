@@ -1,6 +1,6 @@
 
 import { ActionArgs, LoaderArgs, redirect } from "@remix-run/node";
-import { Form } from "@remix-run/react";
+import { Form, useLoaderData } from "@remix-run/react";
 import { REDIRECT_ENDPOINT } from "globals";
 import { getBearerToken, requestPermission } from "~/helpers/session";
 
@@ -8,7 +8,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     const bearerToken = await getBearerToken(request);
     if (bearerToken)
         return redirect('/LikedTitles');
-    return null;
+    return process.env.DOMAIN;
 }
 
 export const action = async ({ request }: ActionArgs) => {
@@ -16,6 +16,8 @@ export const action = async ({ request }: ActionArgs) => {
 }
 
 export default function authorize() {
+    const loaderData = useLoaderData();
+    console.log('process env domain : ', loaderData);
     console.log('redirect_uri : ', REDIRECT_ENDPOINT);
     return (
         <div className="h-full flex 

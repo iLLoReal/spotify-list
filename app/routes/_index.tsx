@@ -22,7 +22,6 @@ export const action = async ({request}: ActionArgs) => {
 
 export default function Index() {
   console.log('Redirect_uri: ', REDIRECT_ENDPOINT);
-  console.log('domain : ', process.env.DOMAIN);
   console.log('Hello');
   return (
     <div className="h-full 
