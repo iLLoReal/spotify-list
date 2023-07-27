@@ -22,7 +22,7 @@ const { getSession, commitSession, destroySession } =
         maxAge: 60,
         sameSite: "none",
         secrets: [process.env.COOKIE_SECRET || "s3cret1"],
-        secure: process.env.NODE_ENV === "production" ? true : false,
+        secure: true,
       },
     }
   );
