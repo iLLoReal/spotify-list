@@ -18,6 +18,7 @@ const { getSession, commitSession, destroySession } =
     {
       cookie: {
         name: cookieName,
+        httpOnly: true,
         domain: process.env.DOMAIN,
         maxAge: 60,
         sameSite: "none",
