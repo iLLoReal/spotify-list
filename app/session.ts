@@ -20,7 +20,7 @@ const { getSession, commitSession, destroySession } =
         name: cookieName,
         domain: process.env.DOMAIN,
         maxAge: 60,
-        sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
+        sameSite: "none",
         secrets: [process.env.COOKIE_SECRET || "s3cret1"],
         secure: process.env.NODE_ENV === "production" ? true : false,
       },
