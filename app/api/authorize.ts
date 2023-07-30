@@ -10,6 +10,7 @@ export const fetchBearerToken = async (request: Request, authorizationCode: stri
 
     let codeVerifier = session.get('code_verifier');
     console.log('client secret env: ', process.env.CLIENT_SECRET);
+    console.log('accessing client secret with index : ', process.env[0]);
     console.log('client id env: ', process.env.CLIENT_ID);
     console.log('process env : ', process.env);
     if (!codeVerifier)
