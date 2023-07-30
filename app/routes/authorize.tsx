@@ -8,7 +8,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     const bearerToken = await getBearerToken(request);
     if (bearerToken)
         return redirect('/LikedTitles');
-    return 'no bearerToken';
+    return bearerToken;
 }
 
 export const action = async ({ request }: ActionArgs) => {
