@@ -8,7 +8,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     const bearerToken = await getBearerToken(request);
     if (bearerToken)
         return redirect('/LikedTitles');
-    return null;
+    return 'no bearerToken';
 }
 
 export const action = async ({ request }: ActionArgs) => {
@@ -16,6 +16,9 @@ export const action = async ({ request }: ActionArgs) => {
 }
 
 export default function authorize() {
+    const loaderData = useLoaderData();
+
+    console.log(loaderData);
     return (
         <div className="h-full flex 
         flex-col items-center 

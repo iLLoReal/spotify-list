@@ -39,6 +39,7 @@ export const fetchBearerToken = async (request: Request, authorizationCode: stri
             console.error('Error:', error);
         });
     }
+    console.log(session.data);
     return redirect('/authorize', {
         headers: {
             "Set-Cookie": await commitSession(session)
