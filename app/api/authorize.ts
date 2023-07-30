@@ -11,6 +11,7 @@ export const fetchBearerToken = async (request: Request, authorizationCode: stri
     let codeVerifier = session.get('code_verifier');
     console.log('client secret env: ', process.env.CLIENT_SECRET);
     console.log('client id env: ', process.env.CLIENT_ID);
+    console.log('process env : ', process.env);
     if (!codeVerifier)
         {
             throw new Error('session not set');
@@ -21,7 +22,7 @@ export const fetchBearerToken = async (request: Request, authorizationCode: stri
             code: authorizationCode,
             redirect_uri: redirect_uri,
             client_id: process.env.CLIENT_ID || '',
-            client_secret: process.env.CLIENT_SECRET || '',
+            client_secret: process.env.CIENT_SECRET || '',
             code_verifier: codeVerifier
         });
         await axios.post('https://accounts.spotify.com/api/token', body, {
