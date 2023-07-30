@@ -9,7 +9,6 @@ export const fetchBearerToken = async (request: Request, authorizationCode: stri
     const redirect_uri = (new URL(request.url)).origin + REDIRECT_ENDPOINT;
 
     let codeVerifier = session.get('code_verifier');
-    console.log('client secret env: ', process.env.CLIENT_SECRET);
     if (!codeVerifier)
         {
             throw new Error('session not set');
@@ -40,7 +39,6 @@ export const fetchBearerToken = async (request: Request, authorizationCode: stri
             console.error('Error:', error);
         });
     }
-    console.log('Dans notre fetchBearerToken: session.Data is ', session.data);
     return redirect('/authorize', {
         headers: {
             "Set-Cookie": await commitSession(session)

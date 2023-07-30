@@ -8,9 +8,7 @@ export const meta: V2_MetaFunction = () => {
   return [{ title: "spotify-list" }];
 };
 
-export const action = async ({request}: ActionArgs) => {
-  // Tricks pour set le domain du cookie dynamiquement
-  const url = new URL(request.url);
+export const action = async () => {
   return redirect('/authorize');
 }
 
