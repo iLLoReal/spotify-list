@@ -4,7 +4,7 @@ import { fetchTracks } from "~/api/tracks";
 
 export const loader = async ({ request }: LoaderArgs) => {
     const tracks = await fetchTracks(request);
-    return tracks!;
+    return tracks || null;
 }
 
 export function ErrorBoundary({ error }: any) {
