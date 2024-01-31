@@ -1,18 +1,25 @@
 import { redirect } from '@remix-run/node';
 import axios from 'axios';
 import crypto from 'crypto';
-import { BEARER_TOKEN_KEY, CODE_VERIFIER_KEY, REDIRECT_ENDPOINT, scope } from "~/../globals";
+import { BEARER_TOKEN_KEY, REDIRECT_ENDPOINT, scope } from "~/../globals";
 import { commitSession, getSession } from '~/session';
 
 export const fetchBearerToken = async (request: Request, authorizationCode: string = '') => {
     const session = await getSession(request.headers.get('Cookie'));
-    const redirect_uri = (new URL(request.url)).origin + REDIRECT_ENDPOINT;
+    if (process.env.NODE_ENV !== "production") {
+        session.set(BEARER_TOKEN_KEY, "fake_bearer_token");
+        return redirect('/authorize', {
+            headers: {
+                "Set-Cookie": await commitSession(session)
+            }
+        });
+    }
 
+    const redirect_uri = (new URL(request.url)).origin + REDIRECT_ENDPOINT;
     let codeVerifier = session.get('code_verifier');
-    if (!codeVerifier)
-        {
-            throw new Error('session not set');
-        }
+    if (!codeVerifier) {
+        throw new Error('session not set');
+    }
     if (authorizationCode && codeVerifier) {
         let body = new URLSearchParams({
             grant_type: 'authorization_code',
@@ -39,6 +46,7 @@ export const fetchBearerToken = async (request: Request, authorizationCode: stri
             console.error('Error:', error);
         });
     }
+
     return redirect('/authorize', {
         headers: {
             "Set-Cookie": await commitSession(session)
@@ -63,6 +71,13 @@ export const fetchAuthorizationCode = async (request: Request) => {
         code_challenge_method: 'S256',
         code_challenge: codeChallenge
     });
+    if (process.env.NODE_ENV !== "production") {
+        return redirect('http://localhost:3000/requestAccessToken?' + { code: "fake_spotify_resp_code" }, {
+            headers: {
+                "Set-Cookie": await commitSession(session)
+            }
+        })
+    }
     return redirect('https://accounts.spotify.com/authorize?' + args, {
         headers: {
             "Set-Cookie": await commitSession(session)
@@ -101,3 +116,4 @@ async function generateCodeChallenge(codeVerifier: string) {
         .digest();
     return base64encode(Array.from(new Uint8Array(digest)));
 }
+

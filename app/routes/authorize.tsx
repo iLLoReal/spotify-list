@@ -1,7 +1,6 @@
 
 import { ActionArgs, LoaderArgs, redirect } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
-import { REDIRECT_ENDPOINT } from "globals";
+import { Form } from "@remix-run/react";
 import { getBearerToken, requestPermission } from "~/helpers/session";
 
 export const loader = async ({ request }: LoaderArgs) => {
